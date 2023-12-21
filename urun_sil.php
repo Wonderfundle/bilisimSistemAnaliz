@@ -3,7 +3,7 @@
 $servername = "localhost"; // Veritabanı sunucusu
 $username = "root"; // Veritabanı kullanıcı adı
 $password = ""; // Veritabanı şifre
-$dbname = "bilisimanalizproje"; // Veritabanı adı
+$dbname = "bilisimdeneme"; // Veritabanı adı
 
 // Veritabanına bağlan
 $conn = new mysqli($servername, $username, $password, $dbname);
