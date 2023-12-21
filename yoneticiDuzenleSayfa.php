@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>AYKUTSAN-Ürün Düzenleme</title>
+    <title>AYKUTSAN-Yönetici Düzenleme</title>
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
@@ -145,7 +145,7 @@
                                         <div class="form-group row">
                                             <label>Yönetici Şifre</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="sifre" required>
+                                                <input type="text" class="form-control" id="sifre">
                                             </div>
                                         </div>
                                     </div>
@@ -162,13 +162,19 @@
                                 onclick="yoneticiSil()">
                                 SİL
                             </button>
+                            
                             <script>
                                 function yoneticiEkle() {
+                                    
+                                    
+                                    
                                     var yonetici_id= document.getElementById('yonetici_id').value;
                                     var yonetici_adi = document.getElementById('yonetici_adi').value;
                                     var sifre = document.getElementById('sifre').value;
-
-                                    var url = 'yoneticiEkle.php';
+                                    if (yonetici_id === "" || yonetici_adi === "" || sifre === "") {
+                alert("Lütfen tüm alanları doldurun.");
+            } else {
+                var url = 'yoneticiEkle.php';
                                     var params = 'yonetici_id=' + yonetici_id + '&yonetici_adi=' + yonetici_adi + '&sifre=' + sifre;
                                     var xhr = new XMLHttpRequest();
                                     xhr.open('POST', url, true);
@@ -182,6 +188,8 @@
                                     }
 
                                     xhr.send(params);
+            }
+                                    
                                 }
                             </script>
                             <script>
@@ -189,9 +197,12 @@
                                     var yonetici_id = document.getElementById('yonetici_id').value;
                                     var yonetici_adi = document.getElementById('yonetici_adi').value;
                                     var sifre = document.getElementById('sifre').value;
-
+                                    if (yonetici_id === "" || yonetici_adi === "" || sifre === "") {
+                alert("Lütfen tüm alanları doldurun.");
+            } else {
+                
                                     var url = 'yoneticiDuzenle.php';
-                                    var params = 'yonetici_id' + yonetici_id + '&yonetici_adi=' + yonetici_adi + '&sifre=' + sifre;
+                                    var params = 'yonetici_id=' + yonetici_id + '&yonetici_adi=' + yonetici_adi + '&sifre=' + sifre;
                                     var xhr = new XMLHttpRequest();
                                     xhr.open('POST', url, true);
                                     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -203,14 +214,16 @@
                                     }
 
                                     xhr.send(params);
-                                }
+                                }}
                             </script>
                             <script>
                                 function yoneticiSil() {
-                                    var urun_id = document.getElementById('yonetici_id').value;
-
+                                    var yonetici_id = document.getElementById('yonetici_id').value;
+                                    if (yonetici_id === "") {
+                alert("Lütfen ID girin.");
+            } else {
                                     // Kullanıcıya silme işlemini onaylamasını isteyebilirsiniz
-                                    var confirmDelete = confirm("Ürünü silmek istediğinizden emin misiniz?");
+                                    var confirmDelete = confirm("Yöneticiyi silmek istediğinizden emin misiniz?");
 
                                     if (confirmDelete) {
                                         var url = 'yoneticiSil.php';
@@ -226,7 +239,7 @@
 
                                         xhr.send(params);
                                     }
-                                }
+                                } }
                             </script>
 
                         </div>

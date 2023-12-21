@@ -1,18 +1,5 @@
 <?php
-// Veritabanı bağlantısı için bilgiler
-$servername = "localhost"; // Veritabanı sunucusu
-$username = "root"; // Veritabanı kullanıcı adı
-$password = ""; // Veritabanı şifre
-$dbname = "bilisimdeneme"; // Veritabanı adı
-
-// Veritabanına bağlan
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Bağlantıyı kontrol et
-if ($conn->connect_error) {
-    die("Bağlantı hatası: " . $conn->connect_error);
-}
-
+include "02_baglan.php";
 // POST verilerini al
 $urun_id = $_POST['urun_id'];
 

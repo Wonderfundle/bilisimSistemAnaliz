@@ -1,13 +1,5 @@
 <?php
-// veritabanina_ekle.php
-
-// Veritabanı bağlantısı
-$servername = "localhost"; // Veritabanı sunucusu adı
-$username = "root"; // Veritabanı kullanıcı adı
-$password = ""; // Veritabanı şifre
-$dbname = "bilisimdeneme"; // Veritabanı adı
-
-// Veritabanına bağlanma
+include "02_baglan.php";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Bağlantıyı kontrol etme
