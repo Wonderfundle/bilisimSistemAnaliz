@@ -210,11 +210,11 @@
                                 onclick="urunEkle()">
                                 EKLE
                             </button>
-                            <button type="button" id="duzenle" class="btn btn-primary mx-auto col-3 my-1"
+                            <button type="button" id="duzenle" class="btn btn-warning mx-auto col-3 my-1"
                                 onclick="urunDuzenle()">
                                 DÜZENLE
                             </button>
-                            <button type="button" id="duzenle" class="btn btn-primary mx-auto col-3 my-1"
+                            <button type="button" id="duzenle" class="btn btn-danger mx-auto col-3 my-1"
                                 onclick="urunSil()">
                                 SİL
                             </button>
