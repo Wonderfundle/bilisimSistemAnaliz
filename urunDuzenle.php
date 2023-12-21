@@ -57,6 +57,9 @@
                         <a class="nav-link" href="kategoriDuzenle.php">
                             <div class="sb-nav-link-icon"><i class="fa fa-sitemap"></i></div>Kategori Düzenle
                         </a>
+                        <a class="nav-link" href="tedarikciDuzenleSayfa.php">
+                            <div class="sb-nav-link-icon"><i class="fa fa-sitemap"></i></div>Tedarikçi Düzenle
+                        </a>
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
                             data-bs-parent="#sidenavAccordion">
                         </div>
