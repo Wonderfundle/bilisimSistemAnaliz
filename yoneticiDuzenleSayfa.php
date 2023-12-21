@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>AYKUTSAN-Tedarikçi Düzenleme</title>
+    <title>AYKUTSAN-Ürün Düzenleme</title>
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
@@ -57,12 +57,14 @@
                         <a class="nav-link" href="kategoriDuzenle.php">
                             <div class="sb-nav-link-icon"><i class="fa fa-sitemap"></i></div>Kategori Düzenle
                         </a>
-                        <a class="nav-link" href="tedarikciDuzenleSayfa.php"><div class="sb-nav-link-icon"><i class="fa fa-briefcase"></i></div>Tedarikçi Düzenle</a>
+                        <a class="nav-link" href="tedarikciDuzenleSayfa.php">
+                            <div class="sb-nav-link-icon"><i class="fa fa-sitemap"></i></div>Tedarikçi Düzenle
+                        </a>
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
                             data-bs-parent="#sidenavAccordion">
                         </div>
                         <div class="sb-sidenav-menu-heading">Tablolar</div>
-                        <a class="nav-link" href="urunlistele.php">
+                        <a class="nav-link" href="urunListele.php">
                             <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
                             Ürün Listele
                         </a>
@@ -114,16 +116,16 @@
                     <section class="content">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Tedarikçi Düzenle</h3>
+                                <h3 class="card-title">Yönetici Düzenle</h3>
                             </div>
 
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group row">
-                                            <label>Tedarikçi ID</label>
+                                            <label>Yönetici ID</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="tedarikci_id" required>
+                                                <input type="text" class="form-control" id="yonetici_id" required>
                                             </div>
                                         </div>
                                     </div>
@@ -131,9 +133,9 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group row">
-                                            <label>Tedarikçi Adı</label>
+                                            <label>Yönetici Kullanıcı Adı</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="tedarikci_adi" required>
+                                                <input type="text" class="form-control" id="yonetici_adi" required>
                                             </div>
                                         </div>
                                     </div>
@@ -141,35 +143,33 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group row">
-                                            <label>Tedarikçi Adresi</label>
+                                            <label>Yönetici Şifre</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="tedarikci_adresi" required>
+                                                <input type="text" class="form-control" id="sifre" required>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                </div></div>
                             <button type="button" id="ekle" class="btn btn-primary mx-auto col-3 my-1"
-                                onclick="tedarikciEkle()">
+                                onclick="yoneticiEkle()">
                                 EKLE
                             </button>
                             <button type="button" id="duzenle" class="btn btn-warning mx-auto col-3 my-1"
-                                onclick="tedarikciDuzenle()">
+                                onclick="yoneticiDuzenle()">
                                 DÜZENLE
                             </button>
-                            <button type="button" id="sil" class="btn btn-danger mx-auto col-3 my-1"
-                                onclick="tedarikciSil()">
+                            <button type="button" id="duzenle" class="btn btn-danger mx-auto col-3 my-1"
+                                onclick="yoneticiSil()">
                                 SİL
                             </button>
                             <script>
-                                function tedarikciEkle() {
-                                    var tedarikci_id = document.getElementById('tedarikci_id').value;
-                                    var tedarikci_adi = document.getElementById('tedarikci_adi').value;
-                                    var tedarikci_adresi = document.getElementById('tedarikci_adresi').value;
+                                function yoneticiEkle() {
+                                    var yonetici_id= document.getElementById('yonetici_id').value;
+                                    var yonetici_adi = document.getElementById('yonetici_adi').value;
+                                    var sifre = document.getElementById('sifre').value;
 
-                                    var url = 'tedarikciEkle.php';
-                                    var params = 'tedarikci_id=' + tedarikci_id + '&tedarikci_adi=' + tedarikci_adi + '&tedarikci_adresi=' + tedarikci_adresi;
-
+                                    var url = 'yoneticiEkle.php';
+                                    var params = 'yonetici_id=' + yonetici_id + '&yonetici_adi=' + yonetici_adi + '&sifre=' + sifre;
                                     var xhr = new XMLHttpRequest();
                                     xhr.open('POST', url, true);
                                     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -185,14 +185,13 @@
                                 }
                             </script>
                             <script>
-                                function tedarikciDuzenle() {
-                                    var tedarikci_id = document.getElementById('tedarikci_id').value;
-                                    var tedarikci_adi = document.getElementById('tedarikci_adi').value;
-                                    var tedarikci_adresi = document.getElementById('tedarikci_adresi').value;
+                                function yoneticiDuzenle() {
+                                    var yonetici_id = document.getElementById('yonetici_id').value;
+                                    var yonetici_adi = document.getElementById('yonetici_adi').value;
+                                    var sifre = document.getElementById('sifre').value;
 
-                                    var url = 'tedarikciDuzenle.php';
-                                    var params = 'tedarikci_id=' + tedarikci_id + '&tedarikci_adi=' + tedarikci_adi + '&tedarikci_adresi=' + tedarikci_adresi;
-                                    console.log(tedarikci_adi)                                    
+                                    var url = 'yoneticiDuzenle.php';
+                                    var params = 'yonetici_id' + yonetici_id + '&yonetici_adi=' + yonetici_adi + '&sifre=' + sifre;
                                     var xhr = new XMLHttpRequest();
                                     xhr.open('POST', url, true);
                                     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -207,14 +206,15 @@
                                 }
                             </script>
                             <script>
-                                function tedarikciSil() {
-                                    var tedarikci_id = document.getElementById('tedarikci_id').value;
+                                function yoneticiSil() {
+                                    var urun_id = document.getElementById('yonetici_id').value;
 
-                                    var confirmDelete = confirm("Tedarikçiyi silmek istediğinize emin misiniz?")
+                                    // Kullanıcıya silme işlemini onaylamasını isteyebilirsiniz
+                                    var confirmDelete = confirm("Ürünü silmek istediğinizden emin misiniz?");
 
                                     if (confirmDelete) {
-                                        var url = 'tedarikciSil.php';
-                                        var params = 'tedarikci_id=' + tedarikci_id
+                                        var url = 'yoneticiSil.php';
+                                        var params = 'yonetici_id=' + yonetici_id;
                                         var xhr = new XMLHttpRequest();
                                         xhr.open('POST', url, true);
                                         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -228,6 +228,7 @@
                                     }
                                 }
                             </script>
+
                         </div>
                 </div>
                 </section>

@@ -19,7 +19,7 @@ $tedarikci_adi = $_POST['tedarikci_adi'];
 $tedarikci_adresi = $_POST['tedarikci_adresi'];
 
 // Güncelleme sorgusu
-$sql = "UPDATE tedarikciler SET tedarikci_adi='$tedarikci_adi', tedarikci_adres='$tedarikci_adres' WHERE tedarikci_id=$tedarikci_id";
+$sql = "UPDATE tedarikciler SET tedarikci_adi='$tedarikci_adi', tedarikci_adresi='$tedarikci_adresi' WHERE tedarikci_id=$tedarikci_id";
 
 if ($conn->query($sql) === TRUE) {
     echo "Tedarikçi başarıyla güncellendi";

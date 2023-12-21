@@ -16,17 +16,16 @@ if ($conn->connect_error) {
 }
 
 // POST verilerini alma
-$tedarikci_id = $_POST['tedarikci_id'];
-$tedarikci_adi = $_POST['tedarikci_adi'];
-$tedarikci_adresi = $_POST['tedarikci_adresi'];
+$yonetici_id = $_POST['yonetici_id'];
+$yonetici_adi = $_POST['yonetici_adi'];
+$sifre = $_POST['sifre'];
 
-
-$sql = "INSERT INTO tedarikciler (tedarikci_id, tedarikci_adi, tedarikci_adresi) VALUES ('$tedarikci_id', '$tedarikci_adi', '$tedarikci_adresi')";
-
+// SQL sorgusu oluşturma
+$sql = "UPDATE yoneticiler SET yonetici_adi='$yonetici_adi', sifre='$sifre' WHERE yonetici_id=$yonetici_id";
 
 // Sorguyu çalıştırma ve sonucu kontrol etme
 if ($conn->query($sql) === TRUE) {
-    echo "Veri başarıyla eklendi";
+    echo "Yönetici bilgileri başarıyla güncellendi";
 } else {
     echo "Hata: " . $sql . "<br>" . $conn->error;
 }

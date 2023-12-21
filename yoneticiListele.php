@@ -12,7 +12,7 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>     
     </head>
 <body>
-<?php include 'urun_tablosu.php'; ?>
+<?php include 'yoneticiTablo.php'; ?>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
     <a class="navbar-brand ps-3" href="index.html">AYKUTSAN</a>
@@ -89,7 +89,7 @@
     </div>
     <div id="layoutSidenav_content">
         <div class="container-fluid px-4">
-            <h1 class="mt-4">Ürün Tablosu</h1>
+            <h1 class="mt-4">Yöneticiler Tablosu</h1>
             <div class="card mb-4">
                 <div class="card-body">
                     <?php echo $table; ?>

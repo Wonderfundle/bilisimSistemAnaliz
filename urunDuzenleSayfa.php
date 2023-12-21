@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>AYKUTSAN-Tedarikçi Düzenleme</title>
+    <title>AYKUTSAN-Ürün Düzenleme</title>
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
@@ -57,12 +57,14 @@
                         <a class="nav-link" href="kategoriDuzenle.php">
                             <div class="sb-nav-link-icon"><i class="fa fa-sitemap"></i></div>Kategori Düzenle
                         </a>
-                        <a class="nav-link" href="tedarikciDuzenleSayfa.php"><div class="sb-nav-link-icon"><i class="fa fa-briefcase"></i></div>Tedarikçi Düzenle</a>
+                        <a class="nav-link" href="tedarikciDuzenleSayfa.php">
+                            <div class="sb-nav-link-icon"><i class="fa fa-sitemap"></i></div>Tedarikçi Düzenle
+                        </a>
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
                             data-bs-parent="#sidenavAccordion">
                         </div>
                         <div class="sb-sidenav-menu-heading">Tablolar</div>
-                        <a class="nav-link" href="urunlistele.php">
+                        <a class="nav-link" href="urunListele.php">
                             <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
                             Ürün Listele
                         </a>
@@ -114,16 +116,16 @@
                     <section class="content">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Tedarikçi Düzenle</h3>
+                                <h3 class="card-title">Ürün Düzenle</h3>
                             </div>
 
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group row">
-                                            <label>Tedarikçi ID</label>
+                                            <label>Ürün ID</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="tedarikci_id" required>
+                                                <input type="text" class="form-control" id="urun_id" required>
                                             </div>
                                         </div>
                                     </div>
@@ -131,9 +133,9 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group row">
-                                            <label>Tedarikçi Adı</label>
+                                            <label>Ürün Adı</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="tedarikci_adi" required>
+                                                <input type="text" class="form-control" id="urun_adi" required>
                                             </div>
                                         </div>
                                     </div>
@@ -141,34 +143,94 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group row">
-                                            <label>Tedarikçi Adresi</label>
+                                            <label for="kategori_id">Kategori</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="tedarikci_adresi" required>
+                                                <select class="form-control" id="kategori_id" required>
+                                                    <?php
+                                                    include '02_baglan.php';
+                                                    // Kategorileri sorgula
+                                                    $sql = "SELECT kategori_id, kategori_adi FROM kategoriler";
+                                                    $result = $conn->query($sql);
+
+                                                    // Kategorileri <option> elemanları olarak döngü ile oluştur
+                                                    if ($result->num_rows > 0) {
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo '<option value="' . htmlspecialchars($row["kategori_id"]) . '">' . htmlspecialchars($row["kategori_adi"]) . '</option>';
+                                                        }
+                                                    } else {
+                                                        echo '<option value="">Veritabanında kategori bulunamadı.</option>';
+                                                    }
+
+                                                    // Veritabanı bağlantısını kapat
+                                                    $conn->close();
+                                                    ?>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group row">
+                                            <label>Ürün Fiyatı</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="birim_fiyat" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group row">
+                                        <label for="tedarikci_id">Tedarikçi</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="tedarikci_id" name="tedarikci_id" required>
+                                                <?php
+                                                include '02_baglan.php';
+
+                                                // Tedarikçileri sorgula
+                                                $sql = "SELECT tedarikci_id, tedarikci_adi FROM tedarikciler";
+                                                $result = $conn->query($sql);
+
+                                                // Tedarikçileri <option> elemanları olarak döngü ile oluştur
+                                                if ($result->num_rows > 0) {
+                                                    while ($row = $result->fetch_assoc()) {
+                                                        echo '<option value="' . htmlspecialchars($row["tedarikci_id"]) . '">' . htmlspecialchars($row["tedarikci_adi"]) . '</option>';
+                                                    }
+                                                } else {
+                                                    echo '<option value="">Veritabanında tedarikçi bulunamadı.</option>';
+                                                }
+
+                                                // Veritabanı bağlantısını kapat
+                                                $conn->close();
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <button type="button" id="ekle" class="btn btn-primary mx-auto col-3 my-1"
-                                onclick="tedarikciEkle()">
+                                onclick="urunEkle()">
                                 EKLE
                             </button>
                             <button type="button" id="duzenle" class="btn btn-warning mx-auto col-3 my-1"
-                                onclick="tedarikciDuzenle()">
+                                onclick="urunDuzenle()">
                                 DÜZENLE
                             </button>
-                            <button type="button" id="sil" class="btn btn-danger mx-auto col-3 my-1"
-                                onclick="tedarikciSil()">
+                            <button type="button" id="duzenle" class="btn btn-danger mx-auto col-3 my-1"
+                                onclick="urunSil()">
                                 SİL
                             </button>
                             <script>
-                                function tedarikciEkle() {
+                                function urunEkle() {
+                                    var urun_id = document.getElementById('urun_id').value;
+                                    var urun_adi = document.getElementById('urun_adi').value;
+                                    var kategori_id = document.getElementById('kategori_id').value;
+                                    var birim_fiyat = document.getElementById('birim_fiyat').value;
                                     var tedarikci_id = document.getElementById('tedarikci_id').value;
-                                    var tedarikci_adi = document.getElementById('tedarikci_adi').value;
-                                    var tedarikci_adresi = document.getElementById('tedarikci_adresi').value;
 
-                                    var url = 'tedarikciEkle.php';
-                                    var params = 'tedarikci_id=' + tedarikci_id + '&tedarikci_adi=' + tedarikci_adi + '&tedarikci_adresi=' + tedarikci_adresi;
+                                    var url = 'urunEkle.php';
+                                    var params = 'urun_id=' + urun_id + '&urun_adi=' + urun_adi + '&kategori_id=' + kategori_id + '&birim_fiyat=' + birim_fiyat + '&tedarikci_id=' + tedarikci_id;
 
                                     var xhr = new XMLHttpRequest();
                                     xhr.open('POST', url, true);
@@ -185,14 +247,16 @@
                                 }
                             </script>
                             <script>
-                                function tedarikciDuzenle() {
+                                function urunDuzenle() {
+                                    var urun_id = document.getElementById('urun_id').value;
+                                    var urun_adi = document.getElementById('urun_adi').value;
+                                    var kategori_id = document.getElementById('kategori_id').value;
+                                    var birim_fiyat = document.getElementById('birim_fiyat').value;
                                     var tedarikci_id = document.getElementById('tedarikci_id').value;
-                                    var tedarikci_adi = document.getElementById('tedarikci_adi').value;
-                                    var tedarikci_adresi = document.getElementById('tedarikci_adresi').value;
 
-                                    var url = 'tedarikciDuzenle.php';
-                                    var params = 'tedarikci_id=' + tedarikci_id + '&tedarikci_adi=' + tedarikci_adi + '&tedarikci_adresi=' + tedarikci_adresi;
-                                    console.log(tedarikci_adi)                                    
+                                    var url = 'urunDuzenle.php';
+                                    var params = 'urun_id=' + urun_id + '&urun_adi=' + urun_adi + '&kategori_id=' + kategori_id + '&birim_fiyat=' + birim_fiyat + '&tedarikci_id=' + tedarikci_id;
+                                    console.log(kategori_id)
                                     var xhr = new XMLHttpRequest();
                                     xhr.open('POST', url, true);
                                     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -207,14 +271,15 @@
                                 }
                             </script>
                             <script>
-                                function tedarikciSil() {
-                                    var tedarikci_id = document.getElementById('tedarikci_id').value;
+                                function urunSil() {
+                                    var urun_id = document.getElementById('urun_id').value;
 
-                                    var confirmDelete = confirm("Tedarikçiyi silmek istediğinize emin misiniz?")
+                                    // Kullanıcıya silme işlemini onaylamasını isteyebilirsiniz
+                                    var confirmDelete = confirm("Ürünü silmek istediğinizden emin misiniz?");
 
                                     if (confirmDelete) {
-                                        var url = 'tedarikciSil.php';
-                                        var params = 'tedarikci_id=' + tedarikci_id
+                                        var url = 'urunSil.php';
+                                        var params = 'urun_id=' + urun_id;
                                         var xhr = new XMLHttpRequest();
                                         xhr.open('POST', url, true);
                                         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -228,6 +293,7 @@
                                     }
                                 }
                             </script>
+
                         </div>
                 </div>
                 </section>

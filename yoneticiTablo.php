@@ -13,17 +13,17 @@ if ($conn->connect_error) {
     die("Bağlantı hatası: " . $conn->connect_error);
 }
 
-$sql = "SELECT urun_id, urun_adi, fiyat, stok_miktari FROM urunler";
+// Veritabanından tedarikciler tablosundan veri çek
+$sql = "SELECT yonetici_id, yonetici_adi, sifre FROM yoneticiler";
 $result = $conn->query($sql);
 
 // Veritabanı sorgusundan gelen verileri kullanarak tabloyu oluştur
 $table = '<table id="datatablesSimple" class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Ürün ID</th>
-                    <th>Ürün Adı</th>
-                    <th>Fiyat</th>
-                    <th>Stok Miktarı</th>
+                    <th>Yönetici ID</th>
+                    <th>Yönetici Adı</th>
+                    <th>Yönetici Şifresi</th>
                 </tr>
             </thead>
             <tbody>';
@@ -32,10 +32,9 @@ if ($result->num_rows > 0) {
     // Veritabanından gelen her bir satır için tabloya bir satır ekleyin
     while ($row = $result->fetch_assoc()) {
         $table .= '<tr>
-                      <td>' . $row['urun_id'] . '</td>
-                      <td>' . $row['urun_adi'] . '</td>
-                      <td>' . $row['fiyat'] . '</td>
-                      <td>' . $row['stok_miktari'] . '</td>
+                      <td>' . $row['yonetici_id'] . '</td>
+                      <td>' . $row['yonetici_adi'] . '</td>
+                      <td>' . $row['sifre'] . '</td>
                    </tr>';
     }
 } else {
