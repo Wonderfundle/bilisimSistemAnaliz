@@ -206,13 +206,16 @@
                                 </div>
 
                             </div>
-                            <button type="button" id="ekle" class="btn btn-primary mx-auto" onclick="urunEkle()">
+                            <button type="button" id="ekle" class="btn btn-primary mx-auto col-3 my-1"
+                                onclick="urunEkle()">
                                 EKLE
                             </button>
-                            <button type="button" id="duzenle" class="btn btn-warning mx-auto" onclick="urunDuzenle()">
+                            <button type="button" id="duzenle" class="btn btn-primary mx-auto col-3 my-1"
+                                onclick="urunDuzenle()">
                                 DÜZENLE
                             </button>
-                            <button type="button" id="duzenle" class="btn btn-danger mx-auto" onclick="urunSil()">
+                            <button type="button" id="duzenle" class="btn btn-primary mx-auto col-3 my-1"
+                                onclick="urunSil()">
                                 SİL
                             </button>
                             <script>

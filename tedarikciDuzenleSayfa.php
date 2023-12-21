@@ -148,14 +148,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" id="ekle" class="btn btn-primary mx-auto" onclick="tedarikciEkle()">
+                            <button type="button" id="ekle" class="btn btn-primary mx-auto col-3 my-1"
+                                onclick="tedarikciEkle()">
                                 EKLE
                             </button>
-                            <button type="button" id="duzenle" class="btn btn-warning mx-auto"
+                            <button type="button" id="duzenle" class="btn btn-warning mx-auto col-3 my-1"
                                 onclick="tedarikciDuzenle()">
                                 DÜZENLE
                             </button>
-                            <button type="button" id="sil" class="btn btn-danger mx-auto" onclick="tedarikciSil()">
+                            <button type="button" id="sil" class="btn btn-danger mx-auto col-3 my-1"
+                                onclick="tedarikciSil()">
                                 SİL
                             </button>
                             <script>
