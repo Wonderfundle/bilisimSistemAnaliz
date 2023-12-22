@@ -3,7 +3,6 @@ include "02_baglan.php";
 // Veritabanından urunler tablosundan veri çek
 $sql = "SELECT depo_id, depo_adi FROM depolar";
 $result = $conn->query($sql);
-
 // Veritabanı sorgusundan gelen verileri kullanarak tabloyu oluştur
 $table = '<table id="datatablesSimple" class="table table-bordered">
             <thead>

@@ -123,57 +123,17 @@
                 </div>
                 Ürün Listele
               </a>
-              <a
-                class="nav-link collapsed"
-                href="#"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapsePages"
-                aria-expanded="false"
-                aria-controls="collapsePages"
-              >
-                <div class="sb-nav-link-icon">
-                  <i class="fas fa-book-open"></i>
-                </div>
-                Depo Listele
-                <div class="sb-sidenav-collapse-arrow">
-                  <i class="fas fa-angle-down"></i>
-                </div>
-              </a>
-              <div
-                class="collapse"
-                id="collapsePages"
-                aria-labelledby="headingTwo"
-                data-bs-parent="#sidenavAccordion"
-              >
-                <nav
-                  class="sb-sidenav-menu-nested nav accordion"
-                  id="sidenavAccordionPages"
-                >
-                  <a class="nav-link" href="depoListele.php">
-                    <div class="sb-nav-link-icon">
-                      <i class="fa fa-align-left"></i>
-                    </div>
-                    Depo 1
-                  </a>
-                  <a class="nav-link" href="charts.html">
-                    <div class="sb-nav-link-icon">
-                      <i class="fa fa-align-left"></i>
-                    </div>
-                    Depo 2
-                  </a>
-                  <a class="nav-link" href="charts.html">
-                    <div class="sb-nav-link-icon">
-                      <i class="fa fa-align-left"></i>
-                    </div>
-                    Depo 3
-                  </a>
-                </nav>
-              </div>
               <a class="nav-link" href="tedarikciListele.php">
                 <div class="sb-nav-link-icon">
                   <i class="fa fa-align-left"></i>
                 </div>
                 Tedarikçi Listele
+              </a>
+              <a class="nav-link" href="depoListele.php">
+                <div class="sb-nav-link-icon">
+                  <i class="fa fa-align-left"></i>
+                </div>
+                Depo Listele
               </a>
               <a class="nav-link" href="yoneticiListele.php">
                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -215,10 +175,10 @@
                 <div class="card mb-4">
                   <div class="card-header">
                     <i class="fas fa-chart-bar me-1"></i>
-                    Depolardaki Sayı
+                    Kategorilerdeki Sayı
                   </div>
                   <div class="card-body">
-                    <canvas id="myBarChart" width="100%" height="40"></canvas>
+                    <canvas id="kategoriBar" width="100%" height="40"></canvas>
                   </div>
                 </div>
               </div>
@@ -236,6 +196,82 @@
         </footer>
       </div>
     </div>
+    <?php
+    // Veritabanı bağlantısı
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "bilisimdeneme";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Verileri çek
+    $sql = "SELECT kategori_id, COUNT(*) as sayi FROM urunler GROUP BY kategori_id";
+    $result = $conn->query($sql);
+
+    // Veritabanı bağlantısını kapat
+    $conn->close();
+    ?>
+
+    <script>
+        // PHP tarafından çekilen veriler
+        const phpData = <?php echo json_encode($result->fetch_all(MYSQLI_ASSOC)); ?>;
+        
+        // Verileri düzenle
+        const categories = phpData.map(item => item.kategori_id);
+        const data = phpData.map(item => item.sayi);
+
+        document.addEventListener('DOMContentLoaded', function() {
+    // Canvas elementini seç
+    const canvas = document.getElementById('kategoriBar');
+
+    if (!canvas) {
+        console.error('Canvas elementi bulunamadı!');
+        return;
+    }
+
+    // Grafik oluştur
+    const ctx = canvas.getContext('2d');
+    const myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: categories,
+            datasets: [{
+                label: 'Veri Miktarı',
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'category',
+                    labels: categories,
+                    title: {
+                        display: true,
+                        text: 'Ürün Kategorileri'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Veri Miktarı'
+                    }
+                }
+            }
+        }
+    });
+});
+
+    </script>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"

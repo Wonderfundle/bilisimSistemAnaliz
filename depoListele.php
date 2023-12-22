@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
     <meta charset="utf-8" />
@@ -7,14 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Ürün Tablosu - AYKUTSAN</title>
+    <title>Depo Tablosu - AYKUTSAN</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <?php include 'depoTablo.php' ?>
+    
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="index.html">AYKUTSAN</a>
@@ -100,14 +100,30 @@
                 </div>
             </nav>
         </div>
-        <div id="layoutSidenav_content">
-            <div class="container-fluid px-4">
-                <h1 class="mt-4">Depo Tablosu</h1>
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <?php echo $table; ?>
-                    </div>
-                </div>
+       <div id="layoutSidenav_content">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Depo Tablosu</h1>
+        <div class="card mb-4">
+            <div class="card-body">
+                <!-- Sadece depoTablo.php'yi burada include edin -->
+                <?php include 'depoTablo.php' ?>
+                
+                <!-- Tabloyu buraya ekleyin -->
+                <?php echo $table; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function getSelectedDepoData(selectElement) {
+        var selectedDepoId = selectElement.value;
+
+        // Seçilen depo ID'sini kullanarak yapılacak işlemleri buraya ekleyin
+        alert("Seçilen Depo ID: " + selectedDepoId);
+    }
+</script>
+
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
@@ -123,6 +139,23 @@
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
             crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
-</body>
+
+        <script>
+            function getSelectedDepoData(selectElement) {
+                var selectedDepoId = selectElement.value;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var rowData = JSON.parse(this.responseText);
+                        var row = selectElement.parentNode.parentNode;
+                        row.cells[2].textContent = rowData.someData; // Burayı gerçek veriyi göstermek için ayarlayın
+                    }
+                };
+                xhttp.open("GET", "getSelectedDepoData.php?depo_id=" + selectedDepoId, true);
+                xhttp.send();
+            }
+        </script>
+    </body>
 
 </html>
