@@ -54,7 +54,7 @@
                         <a class="nav-link" href="stokDuzenle.php">
                             <div class="sb-nav-link-icon"><i class="fa fa-briefcase"></i></div>Stok Düzenle
                         </a>
-                        <a class="nav-link" href="kategoriDuzenle.php">
+                        <a class="nav-link" href="kategoriDuzenleSayfa.php">
                             <div class="sb-nav-link-icon"><i class="fa fa-sitemap"></i></div>Kategori Düzenle
                         </a>
                         <a class="nav-link" href="tedarikciDuzenleSayfa.php">
@@ -116,16 +116,16 @@
                     <section class="content">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Kategori Düzenle</h3>
+                                <h3 class="card-title">Depo Düzenle</h3>
                             </div>
 
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group row">
-                                            <label>Kategori ID</label>
+                                            <label>Depo ID</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="kategori_id" required>
+                                                <input type="text" class="form-control" id="depo_id" required>
                                             </div>
                                         </div>
                                     </div>
@@ -133,33 +133,33 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group row">
-                                            <label>Kategori Adı</label>
+                                            <label>Depo Adı</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="kategori_adi" required>
+                                                <input type="text" class="form-control" id="depo_adi" required>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <button type="button" id="ekle" class="btn btn-primary mx-auto col-3 my-1"
-                                onclick="kategoriEkle()">
+                                onclick="depoEkle()">
                                 EKLE
                             </button>
                             <button type="button" id="duzenle" class="btn btn-warning mx-auto col-3 my-1"
-                                onclick="kategoriDuzenle()">
+                                onclick="depoDuzenle()">
                                 DÜZENLE
                             </button>
                             <button type="button" id="sil" class="btn btn-danger mx-auto col-3 my-1"
-                                onclick="kategoriSil()">
+                                onclick="depoSil()">
                                 SİL
                             </button>
                             <script>
-                                function kategoriEkle() {
-                                    var kategori_id = document.getElementById('kategori_id').value;
-                                    var kategori_adi = document.getElementById('kategori_adi').value;
+                                function depoEkle() {
+                                    var depo_id = document.getElementById('depo_id').value;
+                                    var depo_adi = document.getElementById('depo_adi').value;
 
-                                    var url = 'kategoriEkle.php';
-                                    var params = 'kategori_id=' + kategori_id + '&kategori_adi=' + kategori_adi;
+                                    var url = 'depoEkle.php';
+                                    var params = 'depo_id=' + depo_id + '&depo_adi=' + depo_adi;
 
                                     var xhr = new XMLHttpRequest();
                                     xhr.open('POST', url, true);
@@ -176,13 +176,13 @@
                                 }
                             </script>
                             <script>
-                                function kategoriDuzenle() {
-                                    var kategori_id = document.getElementById('kategori_id').value;
-                                    var kategori_adi = document.getElementById('kategori_adi').value;
+                                function depoDuzenle() {
+                                    var depo_id = document.getElementById('depo_id').value;
+                                    var depo_adi = document.getElementById('depo_adi').value;
 
-                                    var url = 'kategoriDuzenle.php';
-                                    var params = 'kategori_id=' + kategori_id + '&kategori_adi=' + kategori_adi;
-                                    console.log(kategori_adi);
+                                    var url = 'depoDuzenle.php';
+                                    var params = 'depo_id=' + depo_id + '&depo_adi=' + depo_adi;
+                                    console.log(depo_id);
 
                                     var xhr = new XMLHttpRequest();
                                     xhr.open('POST', url, true);
@@ -198,14 +198,14 @@
                                 }
                             </script>
                             <script>
-                                function kategoriSil() {
-                                    var kategori_id = document.getElementById('kategori_id').value;
+                                function depoSil() {
+                                    var depo_id = document.getElementById('depo_id').value;
 
-                                    var confirmDelete = confirm("Kategoriyi silmek istediğinize emin misiniz?")
+                                    var confirmDelete = confirm("Depoyu silmek istediğinize emin misiniz?")
 
                                     if (confirmDelete) {
-                                        var url = 'kategoriSil.php';
-                                        var params = 'kategori_id=' + kategori_id
+                                        var url = 'depoSil.php';
+                                        var params = 'depo_id=' + depo_id
                                         var xhr = new XMLHttpRequest();
                                         xhr.open('POST', url, true);
                                         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');

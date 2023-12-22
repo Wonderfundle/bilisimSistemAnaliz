@@ -12,11 +12,10 @@ if ($conn->connect_error) {
 }
 
 // POST verilerini alma
-$kategori_id = $_POST['kategori_id'];
-$kategori_adi = $_POST['kategori_adi'];
+$depo_id = $_POST['depo_id'];
+$depo_adi = $_POST['depo_adi'];
 
-
-$sql = "INSERT INTO kategoriler (kategori_id,kategori_adi) VALUES ('$kategori_id', '$kategori_adi')";
+$sql = "INSERT INTO depolar (depo_id, depo_adi) VALUES ('$depo_id', '$depo_adi')";
 
 
 // Sorguyu çalıştırma ve sonucu kontrol etme
