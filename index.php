@@ -7,6 +7,8 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>AYKUTSAN</title>
@@ -23,7 +25,7 @@
   <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
       <!-- Navbar Brand-->
-      <a class="navbar-brand ps-3" href="index.html">AYKUTSAN</a>
+      <a class="navbar-brand ps-3" href="index.php">AYKUTSAN</a>
       <!-- Sidebar Toggle-->
       <button
         class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
@@ -62,16 +64,75 @@
         </li>
       </ul>
     </nav>
+    <?php
+include("02_baglan.php");
+
+// Veritabanı sorgusu
+$query = "SELECT kategoriler.kategori_id, kategoriler.kategori_adi, COUNT(urunler.urun_id) as UrunSayisi 
+          FROM Kategoriler 
+          LEFT JOIN Urunler ON kategoriler.kategori_id = urunler.kategori_id 
+          GROUP BY kategoriler.kategori_id, kategoriler.kategori_adi";
+
+$result = $conn->query($query);
+if (!$result) {
+    die("Veritabanı sorgu hatası: " . $conn->error);
+}
+
+// Verileri işleme
+$data = array();
+while ($row = $result->fetch_assoc()) {
+    $data[] = $row;
+}
+
+// Verileri JavaScript tarafına aktarma
+echo '<script>';
+echo 'var chartData = ' . json_encode($data) . ';';
+echo '</script>';
+?>
+
+  <?php
+include("02_baglan.php");
+
+// Veritabanı sorgusu
+$query = "SELECT depolar.depo_id, depolar.depo_adi, SUM(stok.miktar) as ToplamMiktar 
+          FROM depolar 
+          LEFT JOIN stok ON depolar.depo_id = stok.depo_id 
+          GROUP BY depolar.depo_id, depolar.depo_adi";
+
+$result = $conn->query($query);
+if (!$result) {
+    die("Veritabanı sorgu hatası: " . $conn->error);
+}
+
+// Verileri işleme
+$data = array();
+while ($row = $result->fetch_assoc()) {
+    $data[] = $row;
+}
+
+// Verileri JavaScript tarafına aktarma
+echo '<script>';
+echo 'var chartDataDepo = ' . json_encode($data) . ';';
+echo '</script>';
+?>
+
+
     <div id="layoutSidenav">
       <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
           <div class="sb-sidenav-menu">
             <div class="nav">
-              <a class="nav-link" href="index.html">
+              <a class="nav-link" href="index.php">
                 <div class="sb-nav-link-icon">
                   <i class="fas fa-tachometer-alt"></i>
                 </div>
                 Gösterge Paneli
+              </a>
+              <a class="nav-link" href="stokHareketleriListele.php">
+                <div class="sb-nav-link-icon">
+                  <i class="fas fa-cubes"></i>
+                </div>
+                Stok Hareketleri
               </a>
               <div class="sb-sidenav-menu-heading">Düzenleme İşlemleri</div>
               <a class="nav-link" href="urunDuzenleSayfa.php">
@@ -160,27 +221,25 @@
           <div class="container-fluid px-4">
             <h1 class="mt-4">Gösterge Paneli</h1>
             <div class="row">
-              <div class="col-xl-6 mx-auto">
-                <div class="card mb-4">
-                  <div class="card-header">
-                    <i class="fas fa-chart-area me-1"></i>
-                    Kategorilerdeki Ürün Sayımız
-                  </div>
-                  <div class="card-body">
-                    <canvas id="myAreaChart" width="100%" height="40"></canvas>
-                  </div>
+            <div class="col-xl-5 mb-4">
+              <div class="card">
+                <div class="card-header">
+                  <i class="fas fa-chart-area me-1"></i>
+                  Kategorilerdeki Toplam Ürün Sayısı
                 </div>
+                <canvas id="myChart"></canvas>
               </div>
-              <div class="col-xl-6 mx-auto">
-                <div class="card mb-4">
-                  <div class="card-header">
-                    <i class="fas fa-chart-bar me-1"></i>
-                    Kategorilerdeki Sayı
-                  </div>
-                  <div class="card-body">
-                    <canvas id="kategoriBar" width="100%" height="40"></canvas>
-                  </div>
+            </div>
+            <div class="col-xl-1 mb-4"></div>
+            <div class="col-xl-4 mb-4">
+              <div class="card">
+                <div class="card-header">
+                  <i class="fas fa-chart-area me-1"></i>
+                  Depolardaki Toplam Ürün Miktarı
                 </div>
+                <canvas id="myChart2"></canvas>
+              </div>
+            </div>
               </div>
             </div>
           </div>
@@ -196,81 +255,80 @@
         </footer>
       </div>
     </div>
-    <?php
-    // Veritabanı bağlantısı
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "bilisimdeneme";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Verileri çek
-    $sql = "SELECT kategori_id, COUNT(*) as sayi FROM urunler GROUP BY kategori_id";
-    $result = $conn->query($sql);
-
-    // Veritabanı bağlantısını kapat
-    $conn->close();
-    ?>
+              
 
     <script>
-        // PHP tarafından çekilen veriler
-        const phpData = <?php echo json_encode($result->fetch_all(MYSQLI_ASSOC)); ?>;
-        
-        // Verileri düzenle
-        const categories = phpData.map(item => item.kategori_id);
-        const data = phpData.map(item => item.sayi);
-
-        document.addEventListener('DOMContentLoaded', function() {
-    // Canvas elementini seç
-    const canvas = document.getElementById('kategoriBar');
-
-    if (!canvas) {
-        console.error('Canvas elementi bulunamadı!');
-        return;
-    }
-
-    // Grafik oluştur
-    const ctx = canvas.getContext('2d');
-    const myBarChart = new Chart(ctx, {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: categories,
+            labels: chartData.map(item => item.kategori_adi),
             datasets: [{
-                label: 'Veri Miktarı',
-                data: data,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
+                label: 'Ürün Sayısı',
+                data: chartData.map(item => item.UrunSayisi),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',  // Kırmızı
+                    'rgba(54, 162, 235, 0.2)', // Mavi
+                    'rgba(255, 206, 86, 0.2)', // Sarı
+                    'rgba(75, 192, 192, 0.2)', // Yeşil
+                    'rgba(153, 102, 255, 0.2)' // Mor
+                    // İstediğiniz kadar renk ekleyebilirsiniz
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ],
+                borderWidth: 1,
             }]
         },
         options: {
             scales: {
-                x: {
-                    type: 'category',
-                    labels: categories,
-                    title: {
-                        display: true,
-                        text: 'Ürün Kategorileri'
-                    }
-                },
                 y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Veri Miktarı'
-                    }
+                    beginAtZero: true
                 }
             }
         }
     });
-});
+</script>
 
-    </script>
+<script>
+    var ctx = document.getElementById('myChart2').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: chartDataDepo.map(item => item.depo_adi),
+            datasets: [{
+                label: 'Toplam Miktar',
+                data: chartDataDepo.map(item => item.ToplamMiktar),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',  // Kırmızı
+                    'rgba(54, 162, 235, 0.2)', // Mavi
+                    'rgba(255, 206, 86, 0.2)', // Sarı
+                    'rgba(75, 192, 192, 0.2)', // Yeşil
+                    'rgba(153, 102, 255, 0.2)' // Mor
+                    // İstediğiniz kadar renk ekleyebilirsiniz
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ],
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

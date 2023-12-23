@@ -15,7 +15,7 @@
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html">AYKUTSAN</a>
+        <a class="navbar-brand ps-3" href="index.php">AYKUTSAN</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
@@ -38,76 +38,105 @@
         </ul>
     </nav>
     <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                <div class="sb-sidenav-menu">
-                    <div class="nav">
-
-                        <a class="nav-link" href="index.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Gösterge Paneli
-                        </a>
-                        <div class="sb-sidenav-menu-heading">Düzenleme İşlemleri</div>
-                        <a class="nav-link" href="urunDuzenle.php">
-                            <div class="sb-nav-link-icon"><i class="fa fa-exchange"></i></div>Ürün Düzenle
-                        </a>
-                        <a class="nav-link" href="stokDuzenle.php">
-                            <div class="sb-nav-link-icon"><i class="fa fa-briefcase"></i></div>Stok Düzenle
-                        </a>
-                        <a class="nav-link" href="kategoriDuzenleSayfa.php">
-                            <div class="sb-nav-link-icon"><i class="fa fa-sitemap"></i></div>Kategori Düzenle
-                        </a>
-                        <a class="nav-link" href="tedarikciDuzenleSayfa.php">
-                            <div class="sb-nav-link-icon"><i class="fa fa-sitemap"></i></div>Tedarikçi Düzenle
-                        </a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
-                            data-bs-parent="#sidenavAccordion">
-                        </div>
-                        <div class="sb-sidenav-menu-heading">Tablolar</div>
-                        <a class="nav-link" href="urunListele.php">
-                            <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
-                            Ürün Listele
-                        </a>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
-                            aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Depo Listele
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link" href="tables.php">
-                                    <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
-                                    Depo 1
-                                </a>
-                                <a class="nav-link" href="tables.php">
-                                    <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
-                                    Depo 2
-                                </a>
-                                <a class="nav-link" href="tables.php">
-                                    <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
-                                    Depo 3
-                                </a>
-
-                            </nav>
-                        </div>
-                        <a class="nav-link" href="tables.php">
-                            <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
-                            Tedarikçi Listele
-                        </a>
-                        <a class="nav-link" href="tables.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Kullanıcı Ekle
-                        </a>
-                    </div>
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+          <div class="sb-sidenav-menu">
+            <div class="nav">
+              <a class="nav-link" href="index.php">
+                <div class="sb-nav-link-icon">
+                  <i class="fas fa-tachometer-alt"></i>
                 </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small">Giriş Yapan:</div>
-                    Sistem Yöneticisi
+                Gösterge Paneli
+              </a>
+              <a class="nav-link" href="stokHareketleriListele.php">
+                <div class="sb-nav-link-icon">
+                  <i class="fas fa-cubes"></i>
                 </div>
-            </nav>
-        </div>
+                Stok Hareketleri
+              </a>
+              <div class="sb-sidenav-menu-heading">Düzenleme İşlemleri</div>
+              <a class="nav-link" href="urunDuzenleSayfa.php">
+                <div class="sb-nav-link-icon">
+                  <i class="fa fa-exchange"></i>
+                </div>
+                Ürün Düzenle</a
+              >
+              <a class="nav-link" href="tedarikciDuzenleSayfa.php">
+                <div class="sb-nav-link-icon">
+                  <i class="fa fa-briefcase"></i>
+                </div>
+                Tedarikçi Düzenle</a
+              >
+              <a class="nav-link" href="kategoriDuzenleSayfa.php">
+                <div class="sb-nav-link-icon">
+                  <i class="fa fa-sitemap"></i>
+                </div>
+                Kategori Düzenle</a
+              >
+              <a class="nav-link" href="yoneticiDuzenleSayfa.php">
+                <div class="sb-nav-link-icon">
+                  <i class="fa fa-briefcase"></i>
+                </div>
+                Yönetici Düzenle</a
+              >
+              <a class="nav-link" href="depoDuzenleSayfa.php">
+                <div class="sb-nav-link-icon">
+                  <i class="fa fa-sitemap"></i>
+                </div>
+                Depo Düzenle</a
+              >
+              <a class="nav-link" href="stokDuzenleSayfa.php">
+                <div class="sb-nav-link-icon">
+                  <i class="fa fa-sitemap"></i>
+                </div>
+                Stok Düzenle
+              </a>
+              <div
+                class="collapse"
+                id="collapsePages"
+                aria-labelledby="headingTwo"
+                data-bs-parent="#sidenavAccordion"
+              ></div>
+              <div class="sb-sidenav-menu-heading">Tablolar</div>
+              <a class="nav-link" href="urunListele.php">
+                <div class="sb-nav-link-icon">
+                  <i class="fa fa-align-left"></i>
+                </div>
+                Ürün Listele
+              </a>
+              <a class="nav-link" href="tedarikciListele.php">
+                <div class="sb-nav-link-icon">
+                  <i class="fa fa-align-left"></i>
+                </div>
+                Tedarikçi Listele
+              </a>
+              <a class="nav-link" href="depoListele.php">
+                <div class="sb-nav-link-icon">
+                  <i class="fa fa-align-left"></i>
+                </div>
+                Depo Listele
+              </a>
+              <a class="nav-link" href="yoneticiListele.php">
+                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                Yönetici Listele
+              </a>
+              <a class="nav-link" href="kategoriListele.php">
+                <div class="sb-nav-link-icon">
+                  <i class="fa fa-align-left"></i>
+                </div>
+                Kategori Listele
+              </a>
+              <a class="nav-link" href="stokListele.php">
+                <div class="sb-nav-link-icon">
+                  <i class="fa fa-align-left"></i>
+                </div>
+                Stok Listele
+              </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+
 
         <div id="layoutSidenav_content">
 
@@ -122,12 +151,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-                                        <div class="form-group row">
-                                            <label>Stok ID</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="stok_id" required>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <div class="row">
@@ -199,51 +223,22 @@
                                 </div>
 
                             </div>
-                            <button type="button" id="ekle" class="btn btn-primary mx-auto col-3 my-1"
-                                onclick="stokEkle()">
-                                EKLE
-                            </button>
-                            <button type="button" id="duzenle" class="btn btn-warning mx-auto col-3 my-1"
+                            <button type="button" id="duzenle" class="btn btn-primary mx-auto col-3 my-1"
                                 onclick="stokDuzenle()">
-                                DÜZENLE
+                                STOK MİKTARINA EKLEME YAP
                             </button>
                             <button type="button" id="duzenle" class="btn btn-danger mx-auto col-3 my-1"
                                 onclick="stokSil()">
-                                SİL
+                                STOK MİKTARINDAN ÜRÜN AZALT
                             </button>
                             <script>
-                                function stokEkle() {
-                                    var stok_id = document.getElementById('stok_id').value;
-                                    var urun_id = document.getElementById('urun_id').value;
-                                    var depo_id = document.getElementById('depo_id').value;
-                                    var miktar = document.getElementById('miktar').value;
-
-                                    var url = 'stokEkle.php';
-                                    var params = 'stok_id=' + stok_id + '&urun_id=' + urun_id + '&depo_id=' + depo_id + '&miktar=' + miktar;
-
-                                    var xhr = new XMLHttpRequest();
-                                    xhr.open('POST', url, true);
-                                    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-                                    xhr.onreadystatechange = function () {
-                                        if (xhr.readyState == 4 && xhr.status == 200) {
-                                            console.log(xhr.responseText);
-
-                                        }
-                                    }
-
-                                    xhr.send(params);
-                                }
-                            </script>
-                            <script>
                                 function stokDuzenle() {
-                                    var stok_id = document.getElementById('stok_id').value;
                                     var urun_id = document.getElementById('urun_id').value;
                                     var depo_id = document.getElementById('depo_id').value;
                                     var miktar = document.getElementById('miktar').value;
 
-                                    var url = 'stokDuzenle.php';
-                                    var params = 'stok_id=' + stok_id + '&urun_id=' + urun_id + '&depo_id=' + depo_id + '&miktar=' + miktar;
+                                    var url = 'stokEklemeYap.php';
+                                    var params = 'urun_id=' + urun_id + '&depo_id=' + depo_id + '&miktar=' + miktar;
                                     console.log(depo_id)
                                     var xhr = new XMLHttpRequest();
                                     xhr.open('POST', url, true);
@@ -260,25 +255,24 @@
                             </script>
                             <script>
                                 function stokSil() {
-                                    var stok_id = document.getElementById('stok_id').value;
+                                    var urun_id = document.getElementById('urun_id').value;
+                                    var depo_id = document.getElementById('depo_id').value;
+                                    var miktar = document.getElementById('miktar').value;
 
-                                    // Kullanıcıya silme işlemini onaylamasını isteyebilirsiniz
-                                    var confirmDelete = confirm("Stoğu silmek istediğinizden emin misiniz?");
+                                    var url = 'stokSil.php';
+                                    var params = 'urun_id=' + urun_id + '&depo_id=' + depo_id + '&miktar=' + miktar;
+                                    console.log(depo_id)
+                                    var xhr = new XMLHttpRequest();
+                                    xhr.open('POST', url, true);
+                                    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                                    xhr.onreadystatechange = function () {
+                                        if (xhr.readyState == 4 && xhr.status == 200) {
+                                            console.log(xhr.responseText);
 
-                                    if (confirmDelete) {
-                                        var url = 'stokSil.php';
-                                        var params = 'stok_id=' + stok_id;
-                                        var xhr = new XMLHttpRequest();
-                                        xhr.open('POST', url, true);
-                                        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                                        xhr.onreadystatechange = function () {
-                                            if (xhr.readyState == 4 && xhr.status == 200) {
-                                                console.log(xhr.responseText);
-                                            }
                                         }
-
-                                        xhr.send(params);
                                     }
+
+                                    xhr.send(params);
                                 }
                             </script>
 

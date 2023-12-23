@@ -1,22 +1,20 @@
 <?php
 include "02_baglan.php";
-// Veritabanından urunler tablosundan veri çek
 
-$sql = "SELECT stok.stok_id, urunler.urun_id, depolar.depo_id, stok.miktar
+// Veritabanından urunler ve depolar tablolarından veri çek
+$sql = "SELECT urunler.urun_adi, depolar.depo_adi, stok.miktar
         FROM stok
         INNER JOIN urunler ON stok.urun_id = urunler.urun_id 
         INNER JOIN depolar ON stok.depo_id = depolar.depo_id ";
 $result = $conn->query($sql);
 
-
 // Veritabanı sorgusundan gelen verileri kullanarak tabloyu oluştur
 $table = '<table id="datatablesSimple" class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Stok ID</th>
-                    <th>Ürün ID</th>
-                    <th>Depo ID</th>
+                    <th>Ürün Adı</th>
                     <th>Miktar</th>
+                    <th>Depo Adı</th>
                 </tr>
             </thead>
             <tbody>';
@@ -25,10 +23,9 @@ if ($result->num_rows > 0) {
     // Veritabanından gelen her bir satır için tabloya bir satır ekleyin
     while ($row = $result->fetch_assoc()) {
         $table .= '<tr>
-                      <td>' . $row['stok_id'] . '</td>
-                      <td>' . $row['urun_id'] . '</td>
-                      <td>' . $row['depo_id'] . '</td>
+                      <td>' . $row['urun_adi'] . '</td>
                       <td>' . $row['miktar'] . '</td>
+                      <td>' . $row['depo_adi'] . '</td>
                    </tr>';
     }
 } else {
@@ -41,5 +38,4 @@ $table .= '</tbody>
 // Veritabanı bağlantısını kapat
 $conn->close();
 
-// Oluşturulan tabloyu döndür
 ?>
