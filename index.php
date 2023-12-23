@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php include("oturumKontrol.php"); ?>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -58,8 +58,8 @@
           >
             <!--  <li><a class="dropdown-item" href="#!">Settings</a></li>-->
             <!-- <li><a class="dropdown-item" href="#!">Activity Log</a></li>-->
-            <li class="dropdown-header">Sistem Yöneticisi</li>
-            <li><a class="dropdown-item" href="#!">Çıkış Yap</a></li>
+            <li class="dropdown-header"> <?php echo $yonetici_adi; ?></li>
+            <li><a class="dropdown-item" href="cikisYap.php">Çıkış Yap</a></li>
           </ul>
         </li>
       </ul>
