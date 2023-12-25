@@ -81,6 +81,28 @@
                 </div>
                 Stok Hareketleri
               </a>
+              <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                Depo Listele
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link" href="depo1.php">
+                                        <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
+                                        Depo 1
+                                    </a>
+                                    <a class="nav-link" href="depo2.php">
+                                        <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
+                                        Depo 2
+                                    </a>
+                                    <a class="nav-link" href="depo3.php">
+                                        <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
+                                        Depo 3
+                                    </a>
+                            
+                            </nav>
+                        </div>
               <div class="sb-sidenav-menu-heading">Düzenleme İşlemleri</div>
               <a class="nav-link" href="urunDuzenleSayfa.php">
                 <div class="sb-nav-link-icon">
@@ -213,6 +235,9 @@
                                 function kategoriEkle() {
                                     var kategori_id = document.getElementById('kategori_id').value;
                                     var kategori_adi = document.getElementById('kategori_adi').value;
+                                    if (kategori_id === "" ||kategori_adi  === "") {
+                alert("Lütfen tüm alanları doldurun.");
+            } else {
 
                                     var url = 'kategoriEkle.php';
                                     var params = 'kategori_id=' + kategori_id + '&kategori_adi=' + kategori_adi;
@@ -229,13 +254,15 @@
                                     }
 
                                     xhr.send(params);
-                                }
+                                } }
                             </script>
                             <script>
                                 function kategoriDuzenle() {
                                     var kategori_id = document.getElementById('kategori_id').value;
                                     var kategori_adi = document.getElementById('kategori_adi').value;
-
+                                    if (kategori_id === "" ||kategori_adi  === "") {
+                alert("Lütfen tüm alanları doldurun.");
+            } else {
                                     var url = 'kategoriDuzenle.php';
                                     var params = 'kategori_id=' + kategori_id + '&kategori_adi=' + kategori_adi;
                                     console.log(kategori_adi);
@@ -251,12 +278,14 @@
                                     }
 
                                     xhr.send(params);
-                                }
+                                }}
                             </script>
                             <script>
                                 function kategoriSil() {
                                     var kategori_id = document.getElementById('kategori_id').value;
-
+                                    if (kategori_id === "") {
+                alert("Lütfen ID girin.");
+            } else {
                                     var confirmDelete = confirm("Kategoriyi silmek istediğinize emin misiniz?")
 
                                     if (confirmDelete) {
@@ -273,7 +302,7 @@
 
                                         xhr.send(params);
                                     }
-                                }
+                                }}
                             </script>
                         </div>
                 </div>

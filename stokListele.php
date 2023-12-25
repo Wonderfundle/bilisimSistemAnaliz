@@ -82,6 +82,28 @@
                 </div>
                 Stok Hareketleri
               </a>
+              <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                Depo Listele
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link" href="depo1.php">
+                                        <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
+                                        Depo 1
+                                    </a>
+                                    <a class="nav-link" href="depo2.php">
+                                        <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
+                                        Depo 2
+                                    </a>
+                                    <a class="nav-link" href="depo3.php">
+                                        <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
+                                        Depo 3
+                                    </a>
+                            
+                            </nav>
+                        </div>
               <div class="sb-sidenav-menu-heading">Düzenleme İşlemleri</div>
               <a class="nav-link" href="urunDuzenleSayfa.php">
                 <div class="sb-nav-link-icon">

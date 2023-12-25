@@ -1,4 +1,39 @@
 <?php include("oturumKontrol.php"); ?>
+
+<?php
+// Rastgele renk oluşturan fonksiyon
+function randomColor() {
+    return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+}
+
+// Veritabanına bağlan
+include '02_baglan.php';
+
+// Depo 1 ürünlerini listeleyen SQL sorgusu (urunler tablosu ile birleştirme)
+$sql = "SELECT s.urun_id, u.urun_adi, SUM(s.miktar) AS urun_adedi FROM stok s
+        JOIN urunler u ON s.urun_id = u.urun_id
+        WHERE s.depo_id = 1
+        GROUP BY s.urun_id";
+$result = $conn->query($sql);
+
+// Chart.js için gerekli veriyi oluştur
+$labels = [];
+$data = [];
+$colors = [];
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $labels[] = $row['urun_adi'];
+        $data[] = $row['urun_adedi'];
+        $colors[] = randomColor();
+    }
+}
+
+// Veritabanı bağlantısını kapat
+$conn->close();
+?>
+
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -64,58 +99,6 @@
         </li>
       </ul>
     </nav>
-    <?php
-include("02_baglan.php");
-
-// Veritabanı sorgusu
-$query = "SELECT kategoriler.kategori_id, kategoriler.kategori_adi, COUNT(urunler.urun_id) as UrunSayisi 
-          FROM Kategoriler 
-          LEFT JOIN Urunler ON kategoriler.kategori_id = urunler.kategori_id 
-          GROUP BY kategoriler.kategori_id, kategoriler.kategori_adi";
-
-$result = $conn->query($query);
-if (!$result) {
-    die("Veritabanı sorgu hatası: " . $conn->error);
-}
-
-// Verileri işleme
-$data = array();
-while ($row = $result->fetch_assoc()) {
-    $data[] = $row;
-}
-
-// Verileri JavaScript tarafına aktarma
-echo '<script>';
-echo 'var chartData = ' . json_encode($data) . ';';
-echo '</script>';
-?>
-
-  <?php
-include("02_baglan.php");
-
-// Veritabanı sorgusu
-$query = "SELECT depolar.depo_id, depolar.depo_adi, SUM(stok.miktar) as ToplamMiktar 
-          FROM depolar 
-          LEFT JOIN stok ON depolar.depo_id = stok.depo_id 
-          GROUP BY depolar.depo_id, depolar.depo_adi";
-
-$result = $conn->query($query);
-if (!$result) {
-    die("Veritabanı sorgu hatası: " . $conn->error);
-}
-
-// Verileri işleme
-$data = array();
-while ($row = $result->fetch_assoc()) {
-    $data[] = $row;
-}
-
-// Verileri JavaScript tarafına aktarma
-echo '<script>';
-echo 'var chartDataDepo = ' . json_encode($data) . ';';
-echo '</script>';
-?>
-
 
     <div id="layoutSidenav">
       <div id="layoutSidenav_nav">
@@ -241,28 +224,8 @@ echo '</script>';
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid px-4">
-            <h1 class="mt-4">Gösterge Paneli</h1>
-            <div class="row">
-            <div class="col-xl-5 mb-4">
-              <div class="card">
-                <div class="card-header">
-                  <i class="fas fa-chart-area me-1"></i>
-                  Kategorilerdeki Toplam Ürün Sayısı
-                </div>
-                <canvas id="myChart"></canvas>
-              </div>
-            </div>
-            <div class="col-xl-1 mb-4"></div>
-            <div class="col-xl-4 mb-4">
-              <div class="card">
-                <div class="card-header">
-                  <i class="fas fa-chart-area me-1"></i>
-                  Depolardaki Toplam Ürün Miktarı
-                </div>
-                <canvas id="myChart2"></canvas>
-              </div>
-            </div>
-              </div>
+            <h1 class="mt-4">Depo 1 Ürünler</h1>
+            <canvas id="myChart" width="250" height="150"></canvas>
             </div>
           </div>
         </main>
@@ -276,80 +239,36 @@ echo '</script>';
           </div>
         </footer>
       </div>
-    </div>
-              
+</div>
+  </body>
+  <script>
+// Verileri Chart.js formatına dönüştür
+var labels = <?php echo json_encode($labels); ?>;
+var data = <?php echo json_encode($data); ?>;
+var colors = <?php echo json_encode($colors); ?>;
 
-    <script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: chartData.map(item => item.kategori_adi),
-            datasets: [{
-                label: 'Ürün Sayısı',
-                data: chartData.map(item => item.UrunSayisi),
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',  // Kırmızı
-                    'rgba(54, 162, 235, 0.2)', // Mavi
-                    'rgba(255, 206, 86, 0.2)', // Sarı
-                    'rgba(75, 192, 192, 0.2)', // Yeşil
-                    'rgba(153, 102, 255, 0.2)' // Mor
-                    // İstediğiniz kadar renk ekleyebilirsiniz
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)'
-                ],
-                borderWidth: 1,
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+// Chart.js grafiği oluştur
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Ürün Adedi',
+            data: data,
+            backgroundColor: colors,
+            borderColor: colors,
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
             }
         }
-    });
-</script>
-
-<script>
-    var ctx = document.getElementById('myChart2').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: chartDataDepo.map(item => item.depo_adi),
-            datasets: [{
-                label: 'Toplam Miktar',
-                data: chartDataDepo.map(item => item.ToplamMiktar),
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',  // Kırmızı
-                    'rgba(54, 162, 235, 0.2)', // Mavi
-                    'rgba(255, 206, 86, 0.2)', // Sarı
-                    'rgba(75, 192, 192, 0.2)', // Yeşil
-                    'rgba(153, 102, 255, 0.2)' // Mor
-                    // İstediğiniz kadar renk ekleyebilirsiniz
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)'
-                ],
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+    }
+});
 </script>
 
     <script

@@ -81,6 +81,28 @@
                 </div>
                 Stok Hareketleri
               </a>
+              <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                Depo Listele
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link" href="depo1.php">
+                                        <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
+                                        Depo 1
+                                    </a>
+                                    <a class="nav-link" href="depo2.php">
+                                        <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
+                                        Depo 2
+                                    </a>
+                                    <a class="nav-link" href="depo3.php">
+                                        <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
+                                        Depo 3
+                                    </a>
+                            
+                            </nav>
+                        </div>
               <div class="sb-sidenav-menu-heading">Düzenleme İşlemleri</div>
               <a class="nav-link" href="urunDuzenleSayfa.php">
                 <div class="sb-nav-link-icon">
@@ -212,7 +234,9 @@
                                 function depoEkle() {
                                     var depo_id = document.getElementById('depo_id').value;
                                     var depo_adi = document.getElementById('depo_adi').value;
-
+                                    if (depo_id === "" ||depo_adi  === "") {
+                alert("Lütfen tüm alanları doldurun.");
+            } else {
                                     var url = 'depoEkle.php';
                                     var params = 'depo_id=' + depo_id + '&depo_adi=' + depo_adi;
 
@@ -228,13 +252,15 @@
                                     }
 
                                     xhr.send(params);
-                                }
+                                }}
                             </script>
                             <script>
                                 function depoDuzenle() {
                                     var depo_id = document.getElementById('depo_id').value;
                                     var depo_adi = document.getElementById('depo_adi').value;
-
+                                    if (depo_id === "" ||depo_adi  === "") {
+                alert("Lütfen tüm alanları doldurun.");
+            } else {
                                     var url = 'depoDuzenle.php';
                                     var params = 'depo_id=' + depo_id + '&depo_adi=' + depo_adi;
                                     console.log(depo_id);
@@ -250,12 +276,14 @@
                                     }
 
                                     xhr.send(params);
-                                }
+                                }}
                             </script>
                             <script>
                                 function depoSil() {
                                     var depo_id = document.getElementById('depo_id').value;
-
+                                    if (depo_id === "") {
+                alert("Lütfen ID girin.");
+            } else {
                                     var confirmDelete = confirm("Depoyu silmek istediğinize emin misiniz?")
 
                                     if (confirmDelete) {
@@ -272,7 +300,7 @@
 
                                         xhr.send(params);
                                     }
-                                }
+                                }}
                             </script>
                         </div>
                 </div>

@@ -81,6 +81,28 @@
                 </div>
                 Stok Hareketleri
               </a>
+              <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                Depo Listele
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link" href="depo1.php">
+                                        <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
+                                        Depo 1
+                                    </a>
+                                    <a class="nav-link" href="depo2.php">
+                                        <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
+                                        Depo 2
+                                    </a>
+                                    <a class="nav-link" href="depo3.php">
+                                        <div class="sb-nav-link-icon"><i class="fa fa-align-left"></i></div>
+                                        Depo 3
+                                    </a>
+                            
+                            </nav>
+                        </div>
               <div class="sb-sidenav-menu-heading">Düzenleme İşlemleri</div>
               <a class="nav-link" href="urunDuzenleSayfa.php">
                 <div class="sb-nav-link-icon">
@@ -278,12 +300,15 @@
                             </button>
                             <script>
                                 function urunEkle() {
+                                
                                     var urun_id = document.getElementById('urun_id').value;
                                     var urun_adi = document.getElementById('urun_adi').value;
                                     var kategori_id = document.getElementById('kategori_id').value;
                                     var birim_fiyat = document.getElementById('birim_fiyat').value;
                                     var tedarikci_id = document.getElementById('tedarikci_id').value;
-
+                                    if (urun_id === "" || urun_adi === "" || kategori_id === "" || birim_fiyat === "" || tedarikci_id === "" ) {
+                alert("Lütfen tüm alanları doldurun.");
+            } else {
                                     var url = 'urunEkle.php';
                                     var params = 'urun_id=' + urun_id + '&urun_adi=' + urun_adi + '&kategori_id=' + kategori_id + '&birim_fiyat=' + birim_fiyat + '&tedarikci_id=' + tedarikci_id;
 
@@ -299,16 +324,19 @@
                                     }
 
                                     xhr.send(params);
-                                }
+                                }}
                             </script>
                             <script>
                                 function urunDuzenle() {
+                                 
                                     var urun_id = document.getElementById('urun_id').value;
                                     var urun_adi = document.getElementById('urun_adi').value;
                                     var kategori_id = document.getElementById('kategori_id').value;
                                     var birim_fiyat = document.getElementById('birim_fiyat').value;
                                     var tedarikci_id = document.getElementById('tedarikci_id').value;
-
+                                    if (urun_id === "" || urun_adi === "" || kategori_id === "" || birim_fiyat === "" || tedarikci_id === "" ) {
+                alert("Lütfen tüm alanları doldurun.");
+            } else {
                                     var url = 'urunDuzenle.php';
                                     var params = 'urun_id=' + urun_id + '&urun_adi=' + urun_adi + '&kategori_id=' + kategori_id + '&birim_fiyat=' + birim_fiyat + '&tedarikci_id=' + tedarikci_id;
                                     console.log(kategori_id)
@@ -323,12 +351,14 @@
                                     }
 
                                     xhr.send(params);
-                                }
+                                }}
                             </script>
                             <script>
                                 function urunSil() {
                                     var urun_id = document.getElementById('urun_id').value;
-
+                                    if (urun_id === "") {
+                alert("Lütfen ID girin.");
+            } else {
                                     // Kullanıcıya silme işlemini onaylamasını isteyebilirsiniz
                                     var confirmDelete = confirm("Ürünü silmek istediğinizden emin misiniz?");
 
@@ -346,7 +376,7 @@
 
                                         xhr.send(params);
                                     }
-                                }
+                                }  }
                             </script>
 
                         </div>
