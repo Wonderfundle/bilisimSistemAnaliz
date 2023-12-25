@@ -7,7 +7,7 @@ $dbname = "bilisimdeneme"; // Veritabanı adı
 
 // Veritabanına bağlan
 $conn = new mysqli($servername, $username, $password, $dbname);
-
+$conn->set_charset("utf8mb4");
 // Bağlantıyı kontrol et
 if ($conn->connect_error) {
     die("Bağlantı hatası: " . $conn->connect_error);

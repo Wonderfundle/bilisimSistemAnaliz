@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 // Eğer kullanıcı oturumu varsa, kullanıcı bilgilerini kullanabiliriz
 if (isset($_SESSION['yonetici_adi'])) {
     $yonetici_adi = $_SESSION['yonetici_adi']; // Kullanıcı adını kullanabilirsiniz
@@ -9,6 +8,5 @@ if (isset($_SESSION['yonetici_adi'])) {
     header('Location: giris_yap.php');
     exit;
 }
-
 // Burada sayfanızın geri kalanı devam eder...
 ?>

@@ -1,18 +1,6 @@
 <?php
 session_start();
-
-// Veritabanı bağlantısı
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "bilisimDeneme";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Veritabanı bağlantısı başarısız: " . $conn->connect_error);
-}
-
+include("02_baglan.php");
 // Formdan gelen verileri al
 $yoneticiID = $_POST['yoneticiAdi']; // Düzeltildi: yoneticiID -> yoneticiAdi
 
