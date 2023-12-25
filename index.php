@@ -103,7 +103,7 @@
           <div class="nav">
             <a class="nav-link" href="index.php">
               <div class="sb-nav-link-icon">
-                <i class="fas fa-tachometer-alt"></i>
+                <i class="fas fa-tachometer-alt" style="color:blue"></i>
               </div>
               Gösterge Paneli
             </a>
