@@ -30,7 +30,7 @@ if ($result->num_rows > 0) {
         // Şifre doğru, oturumu başlat
         $_SESSION['yonetici_adi'] = $yoneticiAdi;
         echo "Başarıyla giriş yapıldı. Yönlendiriliyorsunuz...";
-        header("Location: index.php"); // index.php yerine yönlendirmek istediğiniz sayfanın adını kullanın
+        header("Location: bekleme.php"); // index.php yerine yönlendirmek istediğiniz sayfanın adını kullanın
         exit();
     } else {
         // Hatalı şifre durumu

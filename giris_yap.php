@@ -21,14 +21,16 @@
     <div id="layoutAuthentication_content">
         <main>
             <div class="my-4"></div>
-            <div class="my-4"></div>
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-5">
+                        
                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                             <div class="card-body">
+                            <img src="aykutsanGiris.jpg" alt="Aykutsan Logo" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+                            <div class="mt-4"></div>
                                 <form action="kontrol.php" method="post">
-                                    <div class="form-floating mb-3">
+                                    <div class="form-floating mb-3">                                    
                                         <select class="form-control" id="yoneticiID" name="yoneticiAdi">
                                             <?php
                                             while ($row = $result->fetch_assoc()) {
